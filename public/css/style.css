@@ -1,5 +1,14 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+.container{
+    flex: 1;
+}
 .navbar{
-    height: 5rem;
+    height: 4rem;
     background-color: #fff;
    
 }
@@ -9,7 +18,7 @@
 .navbar-brand{
     display: block;
     height: auto;
-    width: 110px;
+    width: 100px;
     padding :0px;
     margin-right: 15px;
     margin-left: 3rem;
@@ -58,4 +67,61 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: space-evenly;
+}
+
+
+
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p{
+    font-weight: 800;
+}
+
+.listing-link{
+    text-decoration: none;
+    
+}
+
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+.samebtn{
+    background-color: #bc0404 !important;
+    border: none !important;
+    color: white;
+}
+
+
+
+
+
+
+.show-img{
+    height: 30vh;
+}
+
+.btns{
+    display: flex;
+}
+.card-text{
+
+    margin: 0;
 }
