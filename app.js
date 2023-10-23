@@ -7,6 +7,8 @@ const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const Review = require("./models/review.js");
 const MONGO_URL = "mongodb://127.0.0.1:27017/RentoBuddy";
+const flash = require("connect-flash")
+const session = require('express-session')
 
 const cookieParser = require("cookie-parser")
 // const {listingSchema, reviewSchema} = require("./schema.js");
@@ -31,18 +33,30 @@ app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(cookieParser());
 
+app.use(session({secret: "mysupersecretstring"}));
 
-app.get("/getcookies", (req,res)=>{
-  console.log(req.cookies);
-  res.cookie("greet","hello");
-  res.send("sent you some cookies!");
+const sessionOption = {
+  secret:"mysupersecretcode",
+  resave: false,
+  saveUninitialized:true,
+  cookie:{
+    expires: Date.now() + 7*24*60*60*1000,
+    maxAge:7*24*60*60*1000,
+    httpOnly:true,
+  },
+};
+
+
+
+app.use(session(sessionOption)); 
+app.use(flash());
+
+app.use((req,res, next)=>{
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
 });
 
-
-app.get("/greet", (req, res) => {
-  let{name = "anonymous"} = req.cookies;
-  res.send(`hi ${name}`);
-});
 app.get("/", (req, res) => {
   res.send("Hi, I am root");
 });
@@ -62,6 +76,13 @@ app.get("/listings/new", (req, res) => {
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id).populate("reviews");
+
+  if(!listing){
+    req.flash("error","Listing you requested for does not found");
+    res.redirect("/listings");
+
+  }
+
   res.render("listings/show.ejs", { listing });
 });
 
@@ -69,7 +90,10 @@ app.get("/listings/:id", async (req, res) => {
 app.post("/listings", async (req, res) => {
   const newListing = new Listing(req.body.listing);
   await newListing.save();
+  req.flash("success", "New Listing   Created!");
   res.redirect("/listings");
+
+
 });
 
 //Edit Route
@@ -91,6 +115,7 @@ app.delete("/listings/:id", async (req, res) => {
   let { id } = req.params;
   let deletedListing = await Listing.findByIdAndDelete(id);
   console.log(deletedListing);
+  req.flash("success", "Listing Deleted");
   res.redirect("/listings");
 });
 
@@ -103,6 +128,7 @@ app.post("/listings/:id/reviews", async(req,res)=>{
   listing.reviews.push(newReview);
   await newReview.save();
   await listing.save();
+  req.flash("success", "New review Created");
 
 res.redirect(`/listings/${listing._id}`);
 
@@ -116,23 +142,10 @@ app.delete("/listings/:id/reviews/:reviewId", async(req,res)=>{
 
   await Listing.findByIdAndUpdate(id , {$pull:{reviews: reviewId}});
   await Review.findByIdAndDelete(reviewId);
+  req.flash("success", "Review Deleted");
   res.redirect(`/listings/${id}`);
+ 
 })
-
-
-// app.get("/testListing", async (req, res) => {
-//   let sampleListing = new Listing({
-//     title: "My New Villa",
-//     description: "By the beach",
-//     price: 1200,
-//     location: "Calangute, Goa",
-//     country: "India",
-//   });
-
-//   await sampleListing.save();
-//   console.log("sample was saved");
-//   res.send("successful testing");
-// });
 
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
