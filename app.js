@@ -5,8 +5,11 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
-
+const Review = require("./models/review.js");
 const MONGO_URL = "mongodb://127.0.0.1:27017/RentoBuddy";
+
+const cookieParser = require("cookie-parser")
+// const {listingSchema, reviewSchema} = require("./schema.js");
 
 main()
   .then(() => {
@@ -26,8 +29,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(cookieParser());
 
 
+app.get("/getcookies", (req,res)=>{
+  console.log(req.cookies);
+  res.cookie("greet","hello");
+  res.send("sent you some cookies!");
+});
+
+
+app.get("/greet", (req, res) => {
+  let{name = "anonymous"} = req.cookies;
+  res.send(`hi ${name}`);
+});
 app.get("/", (req, res) => {
   res.send("Hi, I am root");
 });
@@ -46,7 +61,7 @@ app.get("/listings/new", (req, res) => {
 //Show Route
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
-  const listing = await Listing.findById(id);
+  const listing = await Listing.findById(id).populate("reviews");
   res.render("listings/show.ejs", { listing });
 });
 
@@ -78,6 +93,32 @@ app.delete("/listings/:id", async (req, res) => {
   console.log(deletedListing);
   res.redirect("/listings");
 });
+
+
+//Reviews
+//Post Route
+app.post("/listings/:id/reviews", async(req,res)=>{
+  let listing = await Listing.findById(req.params.id);
+  let newReview = new Review(req.body.review);
+  listing.reviews.push(newReview);
+  await newReview.save();
+  await listing.save();
+
+res.redirect(`/listings/${listing._id}`);
+
+}); 
+
+
+//DELETE ROUTE
+
+app.delete("/listings/:id/reviews/:reviewId", async(req,res)=>{
+  let {id, reviewId} = req.params;
+
+  await Listing.findByIdAndUpdate(id , {$pull:{reviews: reviewId}});
+  await Review.findByIdAndDelete(reviewId);
+  res.redirect(`/listings/${id}`);
+})
+
 
 // app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
