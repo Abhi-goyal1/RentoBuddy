@@ -1,0 +1,36 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <h1 class="col-6 offset-2">SignUp on RentoBuddy</h1>
+    <div class="col-6 offset-2">
+        <form action="/signup" method="POST">
+            <div class="mb-2">
+                <label for="username" class="form-label">Username</label>
+                <input name="username" placeholder="Username" id="username" type="text" required class="form-control"  />
+    
+                <div class="valid-feedback">
+                    looks good!
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="Email" class="form-label">Email</label>
+                <input name="email" placeholder="Email" id="Email" type="email" required class="form-control"  />
+    
+                <div class="valid-feedback">
+                    looks good!
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="password" class="form-label">Password</label>
+                <input name="password" placeholder="password" id="password" type="password" required class="form-control"  />
+    
+                <div class="valid-feedback">
+                    looks good!
+                </div>
+            </div>
+
+            <button class="btn btn-success">Signup</button>
+
+        </form>
+    </div>
+</div>

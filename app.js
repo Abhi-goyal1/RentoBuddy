@@ -10,7 +10,11 @@ const MONGO_URL = "mongodb://127.0.0.1:27017/RentoBuddy";
 const flash = require("connect-flash")
 const session = require('express-session')
 
-const cookieParser = require("cookie-parser")
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
+
+const cookieParser = require("cookie-parser");
 // const {listingSchema, reviewSchema} = require("./schema.js");
 
 main()
@@ -51,11 +55,60 @@ const sessionOption = {
 app.use(session(sessionOption)); 
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 app.use((req,res, next)=>{
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
+
+app.get("/signup",async (req,res)=>{
+
+  res.render("users/signup.ejs");
+  
+});
+
+
+
+app.post("/signup",async (req,res)=>{
+  let{username, email, password} = req.body;
+  const newUser = new User({email, username});
+const registeredUser = await  User.register(newUser, password);
+req.flash("success","Welcome to RentoBuddy")
+res.redirect("/listings");
+  
+});
+
+
+
+app.get("/login",async (req,res)=>{
+
+  res.render("users/login.ejs");
+  
+});
+
+app.post("/login", passport.authenticate('local', { failureRedirect: '/login', failureFlash:true, }),async(req,res)=>{
+
+  req.flash("success", "wellcomeback to RentoBuddy")
+  res.redirect("/listings");
+//   let{username, email, password} = req.body;
+//   const newUser = new User({email, username});
+// const registeredUser = await  User.register(newUser, password);
+// req.flash("success","Welcome to RentoBuddy")
+// res.redirect("/listings");
+  
+});
+
+
+
 
 app.get("/", (req, res) => {
   res.send("Hi, I am root");
