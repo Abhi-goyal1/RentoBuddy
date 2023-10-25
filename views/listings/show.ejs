@@ -10,19 +10,24 @@
       
 
        <p class="card-text"><%= listing.description %></p>
+      <p class="card-text"> Owned By <i><%=listing.owner.username%></i></p>
        <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
        <p class="card-text"><%= listing.location %></p>
        <p class="card-text"><%= listing.country %></p>
        
       </div>
-    </div>  
+    </div> 
+    
+    <% if (currUser._id.equals(listing.owner._id)) {%>
+      
+
     <div class="btns">
       <a  class="btn btn-dark samebtn col-2 offset-2" href="/listings/<%= listing._id %>/edit">Edit</a>
         <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
           <button class="btn btn-dark samebtn offset-5">Delete</button>
         </form>
     </div>
-
+    <%} %>
 
     <br>
   </div>
