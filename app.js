@@ -67,6 +67,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res, next)=>{
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+
   next();
 });
 
@@ -82,8 +84,15 @@ app.post("/signup",async (req,res)=>{
   let{username, email, password} = req.body;
   const newUser = new User({email, username});
 const registeredUser = await  User.register(newUser, password);
-req.flash("success","Welcome to RentoBuddy")
+
+req.login(registeredUser, (err)=>{
+  if(err){
+    return next(err);
+  }
+  req.flash("success","Welcome to RentoBuddy")
 res.redirect("/listings");
+})
+
   
 });
 
@@ -99,12 +108,19 @@ app.post("/login", passport.authenticate('local', { failureRedirect: '/login', f
 
   req.flash("success", "wellcomeback to RentoBuddy")
   res.redirect("/listings");
-//   let{username, email, password} = req.body;
-//   const newUser = new User({email, username});
-// const registeredUser = await  User.register(newUser, password);
-// req.flash("success","Welcome to RentoBuddy")
-// res.redirect("/listings");
+
   
+});
+
+
+app.get("/logout", (req,res ,next)=>{
+  req.logOut((err)=>{
+    if(err){
+      return next(err)
+    }
+    req.flash("success","you are logged out!");
+    res.redirect("/listings");
+  })
 });
 
 
@@ -122,7 +138,12 @@ app.get("/listings", async (req, res) => {
 
 //New Route
 app.get("/listings/new", (req, res) => {
-  res.render("listings/new.ejs");
+ if(!req.isAuthenticated()){
+
+  req.flash("error","You must be logged in to create listings.");
+  return res.redirect("/login");
+}
+ res.render("listings/new.ejs");
 });
 
 //Show Route
@@ -151,6 +172,10 @@ app.post("/listings", async (req, res) => {
 
 //Edit Route
 app.get("/listings/:id/edit", async (req, res) => {
+  if(!req.isAuthenticated()){
+    req.flash("error","You must be logged in to create listings.");
+    return res.redirect("/login");
+  }
   let { id } = req.params;
   const listing = await Listing.findById(id);
   res.render("listings/edit.ejs", { listing });
@@ -158,6 +183,10 @@ app.get("/listings/:id/edit", async (req, res) => {
 
 //Update Route
 app.put("/listings/:id", async (req, res) => {
+  if(!req.isAuthenticated()){
+    req.flash("error","You must be logged in to create listings.");
+    return res.redirect("/login");
+  }
   let { id } = req.params;
   await Listing.findByIdAndUpdate(id, { ...req.body.listing });
   res.redirect(`/listings/${id}`);
@@ -165,6 +194,10 @@ app.put("/listings/:id", async (req, res) => {
 
 //Delete Route
 app.delete("/listings/:id", async (req, res) => {
+  if(!req.isAuthenticated()){
+    req.flash("error","You must be logged in to create listings.");
+    return res.redirect("/login");
+  }
   let { id } = req.params;
   let deletedListing = await Listing.findByIdAndDelete(id);
   console.log(deletedListing);
