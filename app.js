@@ -7,8 +7,12 @@ const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const Review = require("./models/review.js");
 const MONGO_URL = "mongodb://127.0.0.1:27017/RentoBuddy";
-const flash = require("connect-flash")
-const session = require('express-session')
+const flash = require("connect-flash");
+const session = require('express-session');
+
+const multer = require("multer");
+const upload = multer({dest: "uploads/"});
+
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -126,7 +130,7 @@ app.get("/logout", (req,res ,next)=>{
 
 
 
-app.get("/", (req, res) => {
+app.get("/",  (req, res) => {
   res.send("Hi, I am root");
 });
 
@@ -149,14 +153,16 @@ app.get("/listings/new", (req, res) => {
 //Show Route
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
-  const listing = await Listing.findById(id).populate("reviews").populate("owner");
+  const listing = await Listing.findById(id).populate({path: "reviews", populate:{
+    path:"author",
+  }}).populate("owner");
 
   if(!listing){
     req.flash("error","Listing you requested for does not found");
     res.redirect("/listings");
 
   }
-console.log(listing);
+console.log(listing );
   res.render("listings/show.ejs", { listing });
 });
 
@@ -212,6 +218,9 @@ app.delete("/listings/:id", async (req, res) => {
 app.post("/listings/:id/reviews", async(req,res)=>{
   let listing = await Listing.findById(req.params.id);
   let newReview = new Review(req.body.review);
+newReview.author = req.user._id;
+
+
   listing.reviews.push(newReview);
   await newReview.save();
   await listing.save();

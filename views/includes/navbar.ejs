@@ -1,38 +1,37 @@
-<nav class="navbar navbar-expand-md  bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md  bg-body-light  sticky-top">
     <div class="container-fluid ">
         <a class="navbar-brand" href="#"><img  src="/img/main.png" alt=""></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse " id="navbarNav">
-            <ul class="navbar-nav ">
+        <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
+            <ul class="navbar-nav ms-auto ">
+               
                 <li class="nav-item">
-                    <a class="nav-link active" href="">Home</a>
+                    <a class="nav-link  nav-link-ltr" href="/listings"><i class="fa-solid fa-house "></i>Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/listings">All listings </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/listings/new">Add new listing</a>
+                    <a class="nav-link  nav-link-ltr nav-link-ltr1" href="/listings/new"><i class="fa-solid fa-location-dot"></i>Add Property</a>
                 </li>
                 
             </ul>
         </div>
+        
         <div class="collapse navbar-collapse  " >
             <ul class="navbar-nav ms-auto">
                 <% if (!currUser) { %>
                       <li class="nav-item">
-                    <a class="nav-link active" href="/signup">Sign Up</a>
+                    <a class="nav-link active" href="/signup"><button class="btn btn-dark">Sign Up</button></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Log in </a>
+                    <a class="nav-link" href="/login"><button class="btn btn-danger">Log in </button></a>
                 </li>
                <% } %>
               
                 <% if (currUser) { %>
                     <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout"><button class="btn btn-danger">logout</button></a>
                 </li>
                     <% } %>
                
@@ -41,3 +40,35 @@
         </div>
     </div>
 </nav>
+<!-- <nav class="navbar navbar-expand-md  bg-body-light border-bottom sticky-top ">
+    <div class="container-fluid ">
+       
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center nav2 " id="navbarNav">
+            <div class="bar">
+                <div class="location">
+                  <p>Location</p>
+                  <input type="text" placeholder="Where are you going?">
+                </div>
+                <div class="check-in">
+                      <p>Check in</p>
+                  <input type="text" placeholder="Add dates">
+                </div>
+                <div class="check-out">
+                      <p>Check out</p>
+                  <input type="text" placeholder="Add dates">
+                </div>
+                <div class="guests">
+                      <p>Guests</p>
+                  <input type="text" placeholder="Add guests">
+                  <span class="btn"><i class="fa-solid fa-magnifying-glass"></i></span>
+                </div>
+              </div>
+             
+        </div>
+    </div>
+</nav> -->
+

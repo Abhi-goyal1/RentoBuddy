@@ -1,14 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&display=swap');
+
+
 body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    /* font-family: 'Crimson Text', serif; */
+    font-family: 'M PLUS Rounded 1c', sans-serif;
 
 }
 .container{
     flex: 1;
 }
 .navbar{
-    height: 4rem;
+    height: 5rem;
     background-color: #fff;
    
 }
@@ -26,8 +32,142 @@ body{
 .nav-link{
     color: #222222 !important;
     font-size: 17px;
+
+}
+.nav-item{
+    padding-right: 10px;
 }
 
+.nav-item i{
+    padding-right: 5px;
+    /* color: #D50100; */
+}
+.nav-link:hover {
+    opacity: 1;
+  }
+  
+  .nav-link::before {
+    transition: 300ms;
+    height: 3px;
+    content: "";
+    position: absolute;
+    background-color:#D50100;
+    border-radius: 20px;
+  }
+  
+  .nav-link-ltr::before {
+    width: 0%;
+    bottom: 20px;
+  }
+  
+  .nav-link-ltr:hover::before {
+    width: 6%;
+  }
+  .nav-link-ltr1:hover::before {
+    width: 10%;
+  }
+  
+
+
+
+
+
+
+
+
+  .bar{
+    width:800px;
+    background:white;
+    box-shadow:0 0 5px hsl(0 0% 78%);
+    height:65px;
+    border-radius:100vw;
+    display:flex;
+    justify-content:center;
+    font-size:0.8rem;
+
+   
+    
+  }
+  
+  .bar div{
+    border-radius:inherit;
+    padding:0.8rem 1.5rem;
+    transition:background 250ms ease;
+  }
+  .bar p{
+    margin: 0px;
+  }
+  
+  .bar div:hover{
+    background:hsl(0 0% 94%);
+  }
+  
+  .location{
+    width:34%;
+  }
+  .check-in, .check-out, .guests{
+    width:22%;
+  }
+  
+  input[type="text"]{
+    background:none;
+    border:none;
+    
+  }
+  
+  input[type="text"]:focus{
+    outline:none;
+  }
+  
+  ::placeholder{
+    font-size:0.75rem;
+  }
+  
+  .guests{
+    position: relative;  
+  }
+  .guests span{
+    position:absolute;
+    top:50%;
+    right:10px;
+    transform:translateY(-50%);
+    background:#D50100;
+    color:white;
+    font-size:1rem;
+    padding:0.7rem;
+    border-radius:90%;
+    width: 26%;
+  }
+  
+  .bar>div{
+    position:relative;
+  }
+  
+  
+  .bar>div::before{
+    position:absolute;
+    content:"";
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+    width:2px;
+    height:55%;
+    background:hsl(0 0% 90%);
+  }
+  
+  .bar>div:nth-of-type(1)::before{
+     background:transparent;
+  }
+  
+  
+  .bar>div:hover::before{
+    background:transparent;
+  }
+
+
+
+
+  
 
 
 

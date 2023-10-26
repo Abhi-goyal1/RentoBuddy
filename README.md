@@ -1,6 +1,6 @@
 {
     Project Report {
-        basicSetup: [nmp i int express ejs mongoose nodemon method-override ],
+        basicSetup: [nmp i int express ejs mongoose nodemon method-override multer],
         touch : app.js,
         connDatabase : RentoBuddy,
         createModule: Listing,
