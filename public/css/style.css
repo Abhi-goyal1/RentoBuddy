@@ -16,6 +16,7 @@ body{
 .navbar{
     height: 5rem;
     background-color: #fff;
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
    
 }
 .navbar-brand img{
@@ -66,13 +67,49 @@ body{
   .nav-link-ltr1:hover::before {
     width: 10%;
   }
+
+  .loginbtn{
+    background-color: #D50100 !important;
+    color: white !important;
+  }
   
 
 
+/* CSS for shrinking the search bar */
+.navbar .search-bar {
+  width: 200px; /* Adjust the width as needed */
+  padding: 8px; /* Add padding for spacing */
+  border: 1px solid #ccc; /* Add a border for styling */
+  border-radius: 50px; /* Round the corners */
+  transition: all 0.3s; /* Add a smooth transition effect */
+}
+
+/* CSS to style the search bar placeholder text */
+.navbar .search-bar::placeholder {
+  color: #888; /* Change the color of the placeholder text */
+}
+
+/* CSS to style the search bar on focus (when clicked) */
+.navbar .search-bar:focus {
+  width: 300px; /* Adjust the width when the search bar is clicked */
+  border: 1px solid #007BFF; /* Change border color on focus */
+  outline: none !important; /* Remove the outline on focus for a cleaner look */
+}
+.search{
+  border-radius: 50px;
+  width: 70px;
+  background-color: #D50100;
+  color: white;
+}
 
 
 
+/* 
 
+
+.nav2{
+  background-color: transparent !important;
+}
 
 
   .bar{
@@ -163,7 +200,7 @@ body{
   .bar>div:hover::before{
     background:transparent;
   }
-
+ */
 
 
 
@@ -247,6 +284,19 @@ body{
     background-color: #bc0404 !important;
     border: none !important;
     color: white;
+    
+}
+.signupbtn{
+  border-radius: 50px !important;
+  padding: 10px;
+  width: 130px;
+ 
+}
+.loginbtn{
+  border-radius: 50px !important;
+  padding: 10px;
+  width: 120px;
+ 
 }
 
 

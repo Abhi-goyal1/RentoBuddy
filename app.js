@@ -130,9 +130,9 @@ app.get("/logout", (req,res ,next)=>{
 
 
 
-app.get("/",  (req, res) => {
-  res.send("Hi, I am root");
-});
+// app.get("/",  (req, res) => {
+//   res.send("Hi, I am root");
+// });
 
 //Index Route
 app.get("/listings", async (req, res) => {
