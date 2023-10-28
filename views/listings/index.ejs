@@ -4,7 +4,7 @@
   .filters{
     display: flex;
     flex-wrap: wrap;
-    font-size: 15px;
+    font-size: 12px;
     align-items: center;
   
    
@@ -33,22 +33,68 @@
  
 } */
 
+@media only screen and (max-width: 1200px){
+.domes{
+  display: none;
+}
+.arctic{
+  display: none;
+}
+}
+@media only screen and (max-width: 992px){
+.farms{
+  display: none;
+}
+.camping{
+  display: none;
+}
+
+}
+
+
 .tax-info{
   display: none;
 }
 .tax-toggle{
   border: 1px solid black;
   border-radius: 50px;
-  height: 3.2rem;
+  height: 2.5rem;
   padding: 0.7rem;
-  font-size: 18px;
+  font-size: 12px;
   display: flex;
   align-items: center;
 }
 .tax-toggle input{
  
 }
+@media only screen and (max-width: 768px){
+.tax-toggle{
+  font-size:12px;
+  height: 2rem;
+  padding: 0.4rem;
 
+}
+.filter i,p{
+  font-size: 12px;
+}
+.swimming{
+  display: none;
+}
+}
+@media only screen and (max-width: 517px){
+.mount{
+  display: none;
+}
+.filter{
+  font-size: 10px;
+}
+}
+@media only screen and (max-width: 432px){
+.city{
+  display: none;
+}
+
+}
 
 
 </style>
@@ -63,32 +109,32 @@
        <div><i class="fa-solid fa-bed"></i></div>
        <p>Rooms</p>
     </div>
-    <div class="filter">
+    <div class="filter city">
        <div><i class="fa-solid fa-mountain-city"></i></div>
        <p>Iconic cities</p>
     </div>
-    <div class="filter">
+    <div class="filter mount">
        <div><i class="fa-brands fa-fort-awesome"></i></div>
        <p>Mountains</p>
     </div>
-    <div class="filter">
+    <div class="filter swimming ">
        <div><i class="fa-solid fa-person-swimming"></i></div>
        <p>Amazing Pools</p>
     </div>
-    <div class="filter">
+    <div class="filter camping">
        <div><i class="fa-solid fa-campground"></i></div>
        <p>Camping</p>
     </div>
-    <div class="filter">
+    <div class="filter farms">
        <div><i class="fa-solid fa-cow"></i></div>
        <p>Farms</p>
     </div>
-    <div class="filter">
+    <div class="filter arctic">
        <div><i class="fa-regular fa-snowflake"></i></div>
        <p>Arctic </p>
     </div>
 
-    <div class="filter">
+    <div class="filter domes">
        <div><i class="fa-solid fa-igloo"></i></div>
        <p>Domes</p>
     </div>
@@ -102,25 +148,31 @@
       </div>
     </div>
    </div>
-   
 
-   <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 ">
-    <% for(let listing of allListings) { %>
-     <a href="listings/<%= listing._id %>" class="listing-link">
-      <div class="card col listing-card" style="width: 18rem;">
-        <img src="<%= listing.image %>" style="height: 20rem;" class="card-img-top" alt="...">
-        <div class="card-body">
-          <p class="card-text">
-            <b><%= listing.title %></b> <br>
-            &#8377; <%= listing.price.toLocaleString("en-In") %> /night
-            <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
-          </p>
-        </div>
-        <div class="card-img-overlay"></div>
-      </div>
-    </a>
-      <% } %>
-   </div>
+
+  
+
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3">
+        <% for(let listing of allListings) { %>
+            <div class="col mb-4">
+                <a href="listings/<%= listing._id %>" class="listing-link">
+                    <div class="card listing-card " >
+                        <img src="<%= listing.image %>" style="height: 20rem;" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <b><%= listing.title %></b> <br>
+                                &#8377; <%= listing.price.toLocaleString("en-In") %> /night
+                                <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+                            </p>
+                        </div>
+                        <div class="card-img-overlay"></div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
+</div>
 
    <script>
     let taxSwitch = document.getElementById("flexSwitchCheckDefault");

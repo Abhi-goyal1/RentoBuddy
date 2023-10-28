@@ -1,27 +1,71 @@
 <% layout("/layouts/boilerplate") %>
+<style>
+    .red-underline {
+        display: inline-block;
+        position: relative;
+    }
 
-<div class="row mt-3">
-    <h1 class="col-6 offset-2">Login</h1>
-    <div class="col-6 offset-2">
-        <form action="/login" method="POST">
-            <div class="mb-2">
+    .red-underline:after {
+        content: "";
+        position: absolute;
+        width: 60%;
+        height: 4px;
+        background-color: red;
+        bottom: -10px; /* Adjust this value to control the gap */
+        left: 80px;
+        border-radius: 20px;
+    }
+    .signup-img{
+        max-width: 80%;
+    }
+    
+    .loginbtn2{
+        border-radius: 50px;
+        width: 100%;
+        background-color: #d50100 !important;
+       
+    }
+    .login-form input{
+        border-radius: 50px;
+    }
+
+    @media only screen and (max-width: 995px){
+  .signup-img{
+    display: none;
+  }
+}
+
+
+</style>
+<div class="row mt-3 ">
+   <h1 class="text-center mt-3 mb-3"><b><span class="red-underline">Welcome Back!</span></b></h1>
+
+    <div class="col-6  d-md-block d-none">
+        <img src="/img/Sign up-cuate.png" alt="Image" class="img-fluid signup-img">
+    </div>
+
+    <div class="col-lg-6 col-md-12  justify-content-center login-form mt-5">
+        <form action="/login" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input name="username" placeholder="Username" id="username" type="text" required class="form-control"  />
-    
-                
+                <input name="username" placeholder="Enter your username" id="username" type="text" required class="form-control" />
+
+
             </div>
-            <div class="mb-2">
+            <div class="mb-4">
                 <label for="password" class="form-label">Password</label>
-                <input name="password" placeholder="password" id="password" type="password" required class="form-control"  />
-    
+                <input name="password" placeholder="Enter Your password" id="password" type="password" required
+                    class="form-control" />
+
                 <div class="valid-feedback">
                     looks good!
                 </div>
             </div>
-        
 
-            <button class="btn btn-success">Login</button>
 
+            <button class="btn btn-success loginbtn2">Login</button>
+            <h6 class="mt-4 mb-4 text-center">Don't have an account? <a href="/signup" style="color: #d50100;">Sign Up</a></h6>
         </form>
     </div>
 </div>
+<hr>

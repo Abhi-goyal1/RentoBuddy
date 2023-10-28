@@ -36,7 +36,7 @@ body{
 
 }
 .nav-item{
-    padding-right: 10px;
+    /* padding-right: 10px; */
 }
 
 .nav-item i{
@@ -103,6 +103,82 @@ body{
   background-color: #D50100;
   color: white;
 }
+@media only screen and (max-width: 1010px){
+  .navbar .search-bar{
+    width: 140px; 
+  }
+  .navbar .search-bar:focus {
+    width: 200px; /* Adjust the width when the search bar is clicked */
+   
+  }
+}
+@media only screen and (max-width: 1005px){
+  .navbar .search-bar{
+    width: 120px; 
+    font-size: 12px;
+    padding: 5px;
+  }
+  .navbar .search-bar:focus {
+    width: 150px; /* Adjust the width when the search bar is clicked */
+   
+  }
+}
+@media only screen and (max-width: 930px){
+  .navbar .search-bar{
+    width: 70px; 
+    font-size: 12px;
+    padding: 5px;
+  }
+  .navbar .search-bar:focus {
+    width: 80px; /* Adjust the width when the search bar is clicked */
+   
+  }
+  .search{
+    border-radius: 50px;
+    width: 50px;
+    
+  }
+  .samebtn{
+    background-color: #bc0404 !important;
+    border: none !important;
+    color: white;
+    
+}
+.signupbtn{
+  border-radius: 50px !important;
+  padding: 5px;
+  width: 80px;
+  font-size: 12px;
+ 
+}
+.loginbtn{
+  border-radius: 50px !important;
+  padding: 10px;
+  width: 80px;
+  font-size: 12px;
+ 
+}
+.nav-link{
+  color: #222222 !important;
+  font-size: 14px;
+ 
+
+}
+.navbar-brand img{
+  max-width: 80%;
+}
+.navbar-brand{
+  display: block;
+  height: auto;
+  width: 100px;
+  padding :0px;
+  margin-right: 10px;
+  margin-left: 2rem;
+}
+
+}
+
+
 
 
 
@@ -372,6 +448,9 @@ body{
 }
 .main-footer{
   background-color: #e9e8e89e;
+  border-top: 20px solid #222222;
+  border-top-right-radius: 50px; 
+  border-top-left-radius: 50px; 
 }
 
 
@@ -468,12 +547,12 @@ body{
 background-size: cover;
 }
 
-@media only screen and (max-width: 500px) {
-  body {
-    margin: 0 15px;
+@media only screen and (max-width: 770px) {
+  .container1 {
+   
   }
   .img-head {
-    margin-top: 75px;
+    margin-top: 25px;
   }
   .form-box {
     display: grid;
@@ -496,7 +575,34 @@ background-size: cover;
   }
   
   .container {
-    border-radius: 15px;
+    border-radius: 0px;
     width: 100%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  submit {
+    /* background: linear-gradient(45deg, #000000, #f88d5f) no-repeat; */
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    padding: 11px 35px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    background-color: #D50100 !important;
+  }
+  
+  .input-main input {
+    height: 26px;
+    width: 200px;
+    background: none;
+    border: none;
+    outline: none;
+    color: #a2a2a2;
+    font-size: 1rem;
+  }
+  .copyright{
+    font-size: 12px;
   }
 }
