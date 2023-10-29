@@ -202,13 +202,22 @@ app.get("/listings/:id/edit", async (req, res) => {
 });
 
 //Update Route
-app.put("/listings/:id", async (req, res) => {
+app.put("/listings/:id", upload.single('listing[image]') , async (req, res) => {
+ 
+
   if(!req.isAuthenticated()){
     req.flash("error","You must be logged in to create listings.");
     return res.redirect("/login");
   }
   let { id } = req.params;
-  await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+ 
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  if(typeof  req.file != "undefine"){
+  let url = req.file.path;
+  let filename = req.file.filename;
+  listing.image ={url , filename};
+  await listing.save();
+  }
   res.redirect(`/listings/${id}`);
 });
 
