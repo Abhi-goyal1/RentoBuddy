@@ -606,3 +606,8 @@ background-size: cover;
     font-size: 12px;
   }
 }
+
+#map{
+  height: 400px;
+ width: 100%;
+}

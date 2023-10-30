@@ -9,6 +9,7 @@
   "author": "Abhi goyal",
   "license": "ISC",
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.15.3",
     "cloudinary": "^1.41.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",

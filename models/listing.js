@@ -18,10 +18,22 @@ const listingSchema = new Schema({
 
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   owner:{
-  
     type:Schema.Types.ObjectId,
     ref:"user",
-  }
+  },
+ 
+  // geometry:{
+  //   type:{
+  //     type:String,
+  //     enum:['Point'],
+  //     required:true
+  //   },
+  //   coordinates :{
+  //     type:[Number],
+  //     required:true
+  //   }
+  // }
+
 });
 
 listingSchema.post("findOneAndDelete", async(listing)=>{

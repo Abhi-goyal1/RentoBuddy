@@ -1,122 +1,309 @@
 <% layout("/layouts/boilerplate") %>
 
+<style>
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 20px; */
+}
 
-<div class="row ">
-  <div class="col-7 offset-2">
-    <div class="card col-8 offset-2 listing-card">
-      <h3><%= listing.title %></h3>
-      <img src="<%= listing.image.url %>" class="card-img show-img" alt="Lisitng_Image">
-      <div class="card-body">
+.card-img {
+    max-width: 100%;
+    height: auto;
+}
 
-        <p class="card-text"><%= listing.description %></p>
-        <p class="card-text"> Owned By <i><%=listing.owner.username%></i></p>
-        <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
-        <p class="card-text"><%= listing.location %></p>
-        <p class="card-text"><%= listing.country %></p>
+.show-img{
+  height: 22rem;
+  max-width: 800px;
+}
+.owner{
+  color: #868686;
+}
+.cancel{
+background-color:#d50100;
+padding: 10px;
+border-radius: 50px;
+color:#ffff;
+width: 70%;
 
-      </div>
-    </div>
+}
+.cancel i{
+  font-size: 20px;
+  padding-right: 10px;
+}
+.showbtn{
+  border-radius: 50px;
+  
+}
+.showbtnedit{
+  width: 40%;
+  background-color: ;
+}
+.showbtndlt{
+  width: 200px;
+}
+.content{
+ padding-left: 20px;
 
-    <% if (currUser && listing.owner._id.equals(currUser._id)) {%>
+}
+.fa-share-nodes{
+  padding-right: 7px;
+}
+.starability-slot {
+  width: 100%;
+}
+.review{
+  
+}
+.submit-rev{
+  width: 100%;
+  border-radius: 50px;
 
-    <div class="btns">
-      <a class="btn btn-dark samebtn col-2 offset-2" href="/listings/<%= listing._id %>/edit">Edit</a>
-      <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-        <button class="btn btn-dark samebtn offset-5">Delete</button>
-      </form>
-    </div>
-    <%} %>
+}
+.rev-card{
+  padding: 10px;
+  align-items: start;
+}
+.offer-icon{
+padding-right: 10px;
+color: #d50100;
+}
 
-    <br>
-  </div>
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
 
-  <div class="col-8 offset-3">
-    <hr>
-    <% if (currUser) {%>
-    <h4>Leave A Review:</h4>
-    <form novalidate method="POST" class="mb-2 needs-validation" action="/listings/<%=listing.id %>/reviews">
-      <div class="mb-3 mt-3">
+    .order-lg-1 {
+        order: 1;
+    }
 
-        <fieldset class="starability-slot">
-          <legend>First rating:</legend>
-          <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-          <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-          <label for="first-rate1" title="Terrible">1 star</label>
-          <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-          <label for="first-rate2" title="Not good">2 stars</label>
-          <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-          <label for="first-rate3" title="Average">3 stars</label>
-          <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-          <label for="first-rate4" title="Very good">4 stars</label>
-          <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-          <label for="first-rate5" title="Amazing">5 stars</label>
-        </fieldset>
-      </div>
+    .order-lg-2 {
+        order: 2;
+    }
+}
+@media (max-width:500px) {
+   .cancel {
+    width: 60%;
+    padding: 6px;
+    font-size: 12px;
+   }
+   .cancel i{
+   font-size: 12px;
+   }
+}
 
-      <div class="mb-3 mt-3">
-        <label class="form-label" for="comment">Comments</label>
-        <textarea required class="form-control" name="review[comment]" id="comment" cols="20" rows="5">
-        </textarea>
-          <div class="invalid-feedback">
-            Please add some comments for review.
-          </div>
-      </div>
-      <br>
-      <button class="btn btn-outline-dark ">Submit</button>
-
-    </form>
-    <%} %>
-
-
+</style>
 
 
 
+  <div class="container ">
+            <div class="card listing-card mt-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6 order-lg-1 order-1">
+                            <img src="<%= listing.image.url %>" class="card-img show-img" alt="Listing_Image">
+                        </div>
+                        <div class="col-lg-6 order-lg-2 order-2 content">
+                            <h2 class=""><b><%= listing.title %></b></h2>
+                            <p class="card-text mb-2"><%= listing.description %></p>
+                            <p class="card-text mb-1 "><b>Location :</b> <%= listing.location %></p>
+                            <p class="card-text mb-1 "><b>Country :</b> <%= listing.country %></p>
+                            <p class="card-text mb-2 "><b>Price :</b> &#8377; <%= listing.price.toLocaleString("en-IN") %></p>
+                            <p class="card-text mb-2 cancel "><b><i class="fa-regular fa-calendar-xmark"></i></b>Free cancellation for 48 hours</p>
+                            <p class="card-text mb-3 mt-3 owner">Owned By <i><%=listing.owner.username%></i></p>
 
-
-
-    <% if(listing.reviews.length > 0){ %>
-    <div class="row">
-      <p><b>All reviews</b></p>
-      <% for(review of listing.reviews) {%>
-      <div class="card col-5 ms-3 mb-3">
-        <div class="card-body">
-
-          <h5 class="card-title"><%= review.author.username %></h5>
-          <p class="card-text"><%= review.comment %></p>
-          <p class="starability-result" data-rating="<%= review.rating %>">
-
-          </p>
+                            <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+                              <div class="btns">
+                                  <a class="btn btn-dark  showbtn showbtnedit col-2  " href="/listings/<%= listing._id %>/edit">Edit</a>
+                                  <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+                                      <button class="btn btn-dark samebtn  showbtndlt showbtn offset-2">Delete</button>
+                                  </form>
+                              </div>
+                              <% }  else { %>
+                                <%= listing.reviews.length %>
+                                <span> Reviews .  <button id="shareButton" class=" btn btn-dark "> <i class="fa-solid fa-share-nodes"></i>Share</button> <button id="" class=" btn btn-success ms-2 "><i class="fa-solid fa-indian-rupee-sign"></i> Buy</button></span>
+                              <% } %>
+                             
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+           
         </div>
-
-        <form method="POST" class="mb-3" action="/listings/<%= listing._id %>/reviews/<%=review._id %>?_method=DELETE">
-          <button class="btn btn-dark "> Delete</button>
-        </form>
-
-
-      </div>
-      <% } %>
-
     </div>
-    <% } %>
-
-    <div class="col-6 offset-3 ,b-3">
-      <h3>Where you'll be</h3>
-      <div id="map"></div>
-    </div>
-
-
-
-    <script>
-      let mapToken = "<%= process.env.MAP_TOKEN %>"
-      mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
-      const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 9 // starting zoom
-      });
-    </script>
-    
-  </div>
 </div>
+<br>
+<hr>
+<br>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 order-2 order-lg-1">
+      
+      <% if (currUser) {%>
+      
+      <form novalidate method="POST" class="mb-2 needs-validation" action="/listings/<%=listing.id %>/reviews">
+        <div class="mb-3 mt-3">
+  
+          <fieldset class="starability-slot">
+            <legend><h5><b>Leave a Review:</b></h5></legend>
+            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        </div>
+  
+        <div class=" mt-3">
+          <label class="form-label" for="comment"><h6><b>Comments</b></h6></label>
+          <textarea required class="form-control review" name="review[comment]" id="comment" cols="10" rows="5">
+          </textarea>
+            <div class="invalid-feedback">
+              Please add some comments for review.
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-dark submit-rev ">Submit</button>
+  
+      </form>
+      <%} %>
+  
+  
+      <% if (listing.reviews.length > 0) { %>
+        <div class="row mt-">
+          <h5><b>All reviews</b></h5>
+          <% for (review of listing.reviews) { %>
+            <div class="col-md-6 col-lg-6 mb-3">
+              <div class="card rev-card">
+                <div class="row g-0">
+                  <div class="">
+                   
+                    <div class="card-body">
+                      <h5 class="card-title"><b>Username :</b> <i><%= review.author.username %></i></h5>
+                      <p class="card-text"><%= review.comment %></p>
+                      <p class="starability-result" data-rating="<%= review.rating %>"></p>
+                    </div>
+                  </div>
+                  
+                </div>
+                <form method="POST" class="mb-3" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                  <button class="btn btn-dark">Delete</button>
+                </form>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% } else { %>
+       <div class="col-12">
+        <h1 class="text-center mt-5 " style="color: #868686;">No reviews !</h1>
+       </div>
+        <% } %>
+
+      
+  
+    
+  
+  
+    </div>
+  
+    <div class="col-md-5 order-1 order-lg-2 ">
+      
+      <div class="row">
+        <h5><b>What this place offers</b></h5>
+        <div class="col-6 mt-3 mb-5 ">
+          <div>
+            <p> <i class="fa-solid fa-seedling offer-icon"></i>Garden view</p>
+          </div>
+          <div>
+            <p><b><i class="fa-solid fa-house-signal  offer-icon"></i></b>Wifi – 28 Mbps</p>
+          </div>
+          <div>
+            <p> <i class="fa-solid fa-car offer-icon"></i>Free parking</p>
+          </div>
+          <div>
+            <p> <i class="fa-solid fa-clipboard-user offer-icon"></i>Waiting staff</p>
+          </div>
+        </div>
+        <div class="col-6 mt-3 mb-5">
+          <div>
+            <p><i class="fa-solid fa-hotel offer-icon"></i>Resort view</p>
+          </div>
+          <div>
+            <p><i class="fa-solid fa-bullhorn offer-icon"></i>Smoke alarm</p>
+          </div>
+          <div>
+            <p> <i class="fa-solid fa-children offer-icon"></i>Couple Friendly</p>
+          </div>
+          <div>
+            <p> <i class="fa-solid fa-video offer-icon"></i>Security cameras</p>
+          </div>
+        </div>
+        
+      </div>
+
+     
+
+    </div>
+   
+   </div>
+   <hr>
+</div>
+
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <h2 class="text-center">Where you will be</h2>
+    <div class="col-11  ">
+  
+      <div id="map"></div>
+    
+    </div>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+<script>
+  const shareButton = document.getElementById("shareButton");
+
+  shareButton.addEventListener("click", function() {
+      const shareOptions = {
+          text: "Check out this link:",
+          url: window.location.href
+      };
+
+      if (navigator.share) {
+          // Use the Web Share API if available (on mobile devices)
+          navigator.share(shareOptions)
+              .then(() => console.log("Shared successfully"))
+              .catch(error => console.error("Error sharing:", error));
+      } else {
+          // Fallback for unsupported browsers
+          const shareUrl = `${shareOptions.text} ${shareOptions.url}`;
+          const el = document.createElement("textarea");
+          el.value = shareUrl;
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand("copy");
+          document.body.removeChild(el);
+          alert("Link copied to clipboard!");
+      }
+  });
+</script>
+
+<script src="/js/map.js"></script>

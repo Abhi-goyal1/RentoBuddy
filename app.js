@@ -28,6 +28,12 @@ const User = require("./models/user.js");
 const cookieParser = require("cookie-parser");
 // const {listingSchema, reviewSchema} = require("./schema.js");
 
+
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapToken = process.env.MAP_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+
+
 main()
   .then(() => {
     console.log("connected to DB");
@@ -175,13 +181,25 @@ console.log(listing );
 
 //Create Route
 app.post("/listings", upload.single('listing[image]') , async  (req, res) => {
+
+  let response = await geocodingClient.forwardGeocode({
+    query: req.body.listing.location,
+    limit: 2
+  })
+    .send();
+    
+
+
   let url = req.file.path;
   let filename = req.file.filename;
 
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   newListing.image ={url , filename};
-  await newListing.save();
+  newListing.geometry = response.body.features[0].geometry;
+
+  let savedListing =  newListing.save();
+  console.log(savedListing);
   req.flash("success", "New Listing   Created!");
   res.redirect("/listings");
   // res.send(req.file);
