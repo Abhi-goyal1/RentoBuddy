@@ -167,7 +167,7 @@ app.get("/login",async (req,res)=>{
 app.post("/login", passport.authenticate('local', { failureRedirect: '/login', failureFlash:true, }),async(req,res)=>{
 
   req.flash("success", "wellcomeback to RentoBuddy")
-  res.redirect("/listings");
+  res.redirect("/");
 
   
 });
@@ -179,7 +179,7 @@ app.get("/logout", (req,res ,next)=>{
       return next(err)
     }
     req.flash("success","you are logged out!");
-    res.redirect("/listings");
+    res.redirect("/");
   })
 });
 
@@ -191,7 +191,7 @@ app.get("/logout", (req,res ,next)=>{
 // });
 
 //Index Route
-app.get("/listings", async (req, res) => {
+app.get("/", async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
 });
@@ -223,7 +223,7 @@ console.log(listing );
 });
 
 //Create Route
-app.post("/listings", upload.single('listing[image]') , async  (req, res) => {
+app.post("/", upload.single('listing[image]') , async  (req, res) => {
 
   let response = await geocodingClient.forwardGeocode({
     query: req.body.listing.location,
@@ -244,7 +244,7 @@ app.post("/listings", upload.single('listing[image]') , async  (req, res) => {
   let savedListing =  newListing.save();
   console.log(savedListing);
   req.flash("success", "New Listing   Created!");
-  res.redirect("/listings");
+  res.redirect("/");
   // res.send(req.file);
 
  
@@ -292,7 +292,7 @@ app.delete("/listings/:id", async (req, res) => {
   let deletedListing = await Listing.findByIdAndDelete(id);
   console.log(deletedListing);
   req.flash("success", "Listing Deleted");
-  res.redirect("/listings");
+  res.redirect("/");
 });
 
 
