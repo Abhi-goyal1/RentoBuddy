@@ -12,7 +12,12 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const Review = require("./models/review.js");
-const MONGO_URL = "mongodb://127.0.0.1:27017/RentoBuddy";
+
+
+// const MONGO_URL = "mongodb://127.0.0.1:27017/RentoBuddy";
+const dbUrl = process.env.ATLASDB_URL;
+const MongoStore = require('connect-mongo');
+
 const flash = require("connect-flash");
 const session = require('express-session');
 
@@ -43,7 +48,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 app.set("view engine", "ejs");
@@ -56,7 +61,20 @@ app.use(cookieParser());
 
 app.use(session({secret: "mysupersecretstring"}));
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto:{
+    secret:"mysupersecretcode"
+  },
+  touchAfter:24*3600,
+});
+
+store.on("error",()=>{
+  console.log("SESSION STORE ERROR")
+});
+
 const sessionOption = {
+  store,
   secret:"mysupersecretcode",
   resave: false,
   saveUninitialized:true,
@@ -66,6 +84,31 @@ const sessionOption = {
     httpOnly:true,
   },
 };
+
+
+
+const productSchema = new mongoose.Schema({
+  name: String,
+  location : String,
+  country : String,
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+
+app.get('/', (req, res) => {
+  res.render('main'); // Render the EJS main page
+});
+
+app.get('/search', async (req, res) => {
+  const searchQuery = req.query.searchQuery;
+
+  // Use the `searchQuery` to filter listings from your database
+  // Example MongoDB Mongoose query:
+  const filteredListings = await Listing.find({ location: { $regex: searchQuery, $options: 'i' } });
+
+  res.render('listings/index.ejs', { allListings: filteredListings, searchLocation: searchQuery });
+});
 
 
 

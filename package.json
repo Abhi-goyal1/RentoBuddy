@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "20.6.1"
+  },
   "name": "rentobuddy",
   "version": "1.0.0",
   "description": "{\r     Project Report {\r         basicSetup: [nmp i int express ejs mongoose nodemon ]\r         touch : app.js\r         connDatabase : \r     }",
@@ -12,6 +15,7 @@
     "@mapbox/mapbox-sdk": "^0.15.3",
     "cloudinary": "^1.41.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
