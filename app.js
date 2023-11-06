@@ -96,9 +96,9 @@ const productSchema = new mongoose.Schema({
 const Product = mongoose.model('Product', productSchema);
 
 
-app.get('/', (req, res) => {
-  res.render('main'); // Render the EJS main page
-});
+// app.get('/', (req, res) => {
+//   res.render('main'); // Render the EJS main page
+// });
 
 app.get('/search', async (req, res) => {
   const searchQuery = req.query.searchQuery;
