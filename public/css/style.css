@@ -73,9 +73,17 @@ body{
     color: white !important;
   }
   
+.navbar-toggler{
+  border: none !important;
+}
+.navbar-toggler-icon{
+  font-size: 15px;
 
 
-
+}
+.btn-close {
+  
+}
 
 /* CSS for shrinking the search bar */
 .navbar .search-bar {
@@ -173,7 +181,7 @@ body{
   width: 100px;
   padding :0px;
   margin-right: 10px;
-  margin-left: 2rem;
+  margin-left: -0.2rem;
 }
 
 }

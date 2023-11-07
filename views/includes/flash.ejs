@@ -1,9 +1,33 @@
+
+<style>
+   @media only screen and (max-width: 580px){
+    .alert{
+        padding: 6px;
+        font-size: 10px;
+    }
+
+    .alertbtn{
+        padding: 10px !important;
+    }
+   }
+   @media only screen and (max-width: 350px){
+    .alert{
+        padding: 3px;
+        font-size: 10px;
+    }
+
+    .alertbtn{
+        padding: 5px !important;
+    }
+   }
+</style>
+
 <% if(success && success.length) { %>
 
-    <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-3" role="alert">
+    <div class="alert alert-success alert-dismissible fade show col-md-8 offset-md-2 col-sm-10 offset-sm-1 mt-3" role="alert">
 
         <%= success %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close alertbtn" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <% } %>
@@ -13,10 +37,10 @@
 
     <% if(error && error.length) { %>
 
-        <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-3" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show col-md-8 col-sm-10 offset-sm-1 offset-md-2 mt-3" role="alert">
     
             <%= error %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close alertbtn" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     
         <% } %>
