@@ -1,56 +1,66 @@
-<nav class="navbar navbar-expand-md  bg-body-light  sticky-top ">
-    <div class="container-fluid ">
-        <a class="navbar-brand" href="/"><img  src="/img/main.png" alt=""></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
-            <ul class="navbar-nav ms-auto ">
-               
-                <li class="nav-item">
-                    <a class="nav-link  nav-link-ltr" href="/"><i class="fa-solid fa-house "></i>Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link  nav-link-ltr nav-link-ltr1" href="/listings/new"><i class="fa-solid fa-location-dot"></i>Add Property</a>
-                </li>
-
-
-               <!-- <input type="search" class="search-bar" placeholder="Search..."> -->
-               <form action="/search" method="POST">
-                <div class="input-group">
-                  <input class="search-bar" type="text" name="searchLocation" placeholder="Search Destination" aria-label="Search">
-                  <button class="btn btn-outline-danger search" type="submit"><i class="fa-solid fa-search"></i></button>
-                </div>
-              </form>
-
-                
-            </ul>
+<nav class="navbar navbar-expand-md bg-body-light sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><img src="/img/main.png" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Offcanvas -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-      
-        <div class="collapse navbar-collapse  " >
-            <ul class="navbar-nav ms-auto">
-                <% if (!currUser) { %>
-                      <li class="nav-item">
-                    <a class="nav-link active" href="/signup"><button class="btn btn-dark signupbtn"><b><i class="fa-solid fa-user-plus"></i>Sign Up</b></button></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login"><button class="btn loginbtn"><b><i class="fa-solid fa-user-lock"></i>Log in</b></button></a>
-                </li>
-               <% } %>
-              
-                <% if (currUser) { %>
-                    <li class="nav-item">
-                    <a class="nav-link" href="/logout"><button class="btn loginbtn"> <i class="fa-solid fa-right-to-bracket"></i>logout</button></a>
-                </li>
-                    <% } %>
-               
-                
-            </ul>
+        <div class="offcanvas-body">
+          <!-- Add your navigation links here -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link nav-link-ltr" href="/"><i class="fa-solid fa-house"></i>Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-ltr nav-link-ltr1" href="/listings/new"><i class="fa-solid fa-location-dot"></i>Add Property</a>
+            </li>
+            <!-- Add your search bar/form here -->
+            <form action="/search" method="POST">
+              <div class="input-group  ">
+                <input class="search-bar form-control search-bar offcanvas-search-bar" type="text" name="searchLocation" placeholder="Search Destination" aria-label="Search">
+                <button class="btn btn-outline-danger search" type="submit"><i class="fa-solid fa-search"></i></button>
+              </div>
+            </form>
+             <!-- Footer for the off-canvas menu -->
+        <div class="offcanvas-footer">
+            <!-- Add your footer content here -->
+            <p>&copy; 2023 RentoBuddy</p>
+          </div>
+          </ul>
         </div>
+      </div>
+      <!-- Main navigation -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Your existing menu items here -->
+        </ul>
+      </div>
+      <!-- Right-aligned links -->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <% if (!currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link active" href="/signup"><button class="btn btn-dark signupbtn"><b><i class="fa-solid fa-user-plus"></i>Sign Up</b></button></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login"><button class="btn loginbtn"><b><i class="fa-solid fa-user-lock"></i>Log in</b></button></a>
+          </li>
+          <% } %>
+          <% if (currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout"><button class="btn loginbtn"> <i class="fa-solid fa-right-to-bracket"></i>logout</button></a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
     </div>
-</nav>
-
+  </nav>
+  
 
 <!-- <nav class="navbar navbar-expand-md  bg-body-light border-bottom sticky-top nav2 ">
     <div class="container-fluid ">

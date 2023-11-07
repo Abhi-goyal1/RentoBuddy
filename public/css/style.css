@@ -178,8 +178,35 @@ body{
 
 }
 
+/* Custom CSS to style the off-canvas footer */
+.offcanvas-footer {
+  background-color: #000000; /* Background color of the footer */
+  padding: 10px; /* Adjust the padding as needed */
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 96%;
+  color: white;
+  display: none;
+}
 
-
+/* Custom CSS to increase the width of the search bar within the off-canvas menu */
+@media (max-width: 767px) {
+  /* Apply styles only when the screen width is less than or equal to 767px (the breakpoint for off-canvas) */
+  .offcanvas-search-bar {
+    width: 100%; /* Adjust the width as needed */
+  }
+  .search{
+    width: 90px;
+  }
+  .input-group {
+    margin-top: 15px;
+  }
+  .offcanvas-footer{
+    display: block;
+  }
+  
+}
 
 
 /* 
