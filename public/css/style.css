@@ -181,12 +181,16 @@ body{
 /* Custom CSS to style the off-canvas footer */
 .offcanvas-footer {
   background-color: #000000; /* Background color of the footer */
-  padding: 10px; /* Adjust the padding as needed */
+  /* padding: 10px; Adjust the padding as needed */
   text-align: center;
   position: absolute;
+  right: 0;
   bottom: 0;
-  width: 96%;
+  width: 100%;
   color: white;
+  display: none;
+}
+.navbar-nav2{
   display: none;
 }
 
@@ -204,6 +208,16 @@ body{
   }
   .offcanvas-footer{
     display: block;
+  }
+  .navbar-nav2{
+    display: block;
+  }
+  .loginbtn{
+    width: 100% !important;
+  
+  }
+  .signupbtn{
+    width: 100% !important;
   }
   
 }
