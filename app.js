@@ -150,7 +150,7 @@ req.login(registeredUser, (err)=>{
     return next(err);
   }
   req.flash("success","Welcome to RentoBuddy")
-res.redirect("/listings");
+res.redirect("/");
 })
 
   
