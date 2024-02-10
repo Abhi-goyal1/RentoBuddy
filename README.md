@@ -126,17 +126,22 @@ regional differences.
 
 Requirement Gathering and analysis − All possible requirements of the system to be developed 
 are captured in this phase and documented in a requirement specification document.
+
 a) System Design − The requirement specifications from first phase are studied in this phase 
 and the system design is prepared. This system design helps in specifying hardware and 
 system requirements and helps in defining the overall system architecture.
+
 b) Implementation − With inputs from the system design, the system is first developed in 
 small programs called units, which are integrated in the next phase. Each unit is developed 
 and tested for its functionality, which is referred to as Unit Testing.
+
 c) Integration and Testing − All the units developed in the implementation phase are
 integrated into a system after testing of each unit. Post integration the entire system is 
 tested for any faults and failures.
+
 d) Deployment of system − Once the functional and non-functional testing is done; the 
 product is deployed in the customer environment or released into the market.
+
 e) Maintenance − There are some issues which come up in the client environment. To fix 
 those issues, patches are released. Also, to enhance the product some better versions are 
 released. Maintenance is done to deliver these changes in the customer environment.
@@ -206,18 +211,22 @@ a) User Module: The User Module is the core component managing user interactions
 accounts. It includes features such as user registration, login, profile management, and 
 notifications. Users can navigate the platform, explore listings, and engage in transactions 
 through this module.
+
 b) Listing Module: The Listing Module facilitates the addition and management of properties 
 and items on the platform. Users, both landlords and sellers, can create and edit listings, 
 specifying details such as property descriptions, item conditions, pricing, and availability. This 
 module ensures a well-organized and searchable catalog of offerings.
+
 c) Transaction Module: The Transaction Module governs the renting and selling processes. It 
 includes functionalities for users to initiate transactions, manage bookings, and handle 
 payments securely. The module also tracks transaction history, providing users with a 
 transparent overview of their engagements.
+
 d) Review Module: The Review Module enhances user trust and transparency by allowing 
 individuals to leave reviews and ratings for properties, items, and other users. It provides a 
 valuable feedback mechanism that contributes to the platform's reputation system. Users can 
 make more informed decisions based on the experiences of others.
+
 # 1. User Module:
 a) Registration:
  Functionality: Allows new users to create accounts on RentoBuddy by providing necessary 
@@ -228,7 +237,9 @@ username/email and password.
 c) Profile Management:
  Functionality: Allows users to edit and manage their profile information, including contact details 
 and preferences.
+
 # 2. Listing Module:
+
 a) Add Listing:
  - Functionality: Enables users to create new listings for their properties or items, inputting details 
 such as descriptions, pricing, and availability.
@@ -241,59 +252,81 @@ items that match their criteria.
 d) Image Upload:
  - Functionality: Allows users to upload images of their properties or items to enhance the listing 
 presentation.
+
  # 3. Review Module:
+ 
 a) Leave Review:
  - Functionality: Permits users to leave reviews and ratings for properties, items, and other users 
 after completing transactions.
 b) View Reviews:
  - Functionality: Allows users to view reviews and ratings associated with specific properties, 
 items, or user profiles to make informed decisions.
-2.2 Potential Future Scope 
+
+# 2.2 Potential Future Scope
+   
 1. Enhanced Mobile Experience:
+   
 a) Develop a dedicated mobile application for RentoBuddy to cater to the growing number of 
 users accessing platforms through mobile devices.
 b) Optimize the mobile app for a seamless and user-friendly experience, ensuring all features 
 are easily accessible on various screen sizes.
-2. Advanced Recommendation System:
+
+3. Advanced Recommendation System:
+   
 a) Implement an AI-driven recommendation system that suggests relevant items or properties 
 to users based on their preferences, past transactions, and browsing history.
 b) Enhance the personalization of the platform to provide a tailored experience for each user.
-3. Virtual Tours and 360-Degree Images:
+
+5. Virtual Tours and 360-Degree Images:
+
 a) Integrate virtual tour features for property rentals, allowing users to explore rental spaces 
 through 360-degree images or virtual reality (VR) experiences.
 b) This can significantly enhance the decision-making process for potential tenants.
-11
-4. Blockchain for Security and Transparency:
+
+6. Blockchain for Security and Transparency:
+   
 a) Explore the integration of blockchain technology to enhance security and transparency in 
 transactions.
 b) Implement smart contracts for rental agreements, ensuring a secure and automated process 
 for property rentals.
-5. Gamification for User Engagement:
+
+8. Gamification for User Engagement:
+   
 a) Introduce gamification elements to encourage user engagement and activity on the 
 platform.
 b) Implement reward systems, badges, or loyalty programs to incentivize users to list more 
 items, refer friends, or participate in community-building activities.
-6. Expand Payment Options:
+
+10. Expand Payment Options:
+
 a) Increase the variety of payment options available on the platform to accommodate 
 different user preferences.
 b) Consider integrating digital wallets, cryptocurrencies, or other emerging payment methods 
 to provide a more inclusive payment environment.
-7. Community Forums and Events:
+
+11. Community Forums and Events:
+
 a) Create community forums or discussion boards within the platform to facilitate 
 communication and collaboration among users.
 b) Organize virtual or local events to bring users together, fostering a sense of community and 
 strengthening neighborhood partnerships.
-8. AI-Powered Customer Support:
+
+12. AI-Powered Customer Support:
+
 a) Implement AI-powered chatbots for customer support to provide quick responses to user 
 queries.
 b) Enhance customer support capabilities with automated systems that can handle common 
 issues, freeing up human support agents for more complex concerns.
-9. Data Analytics for Insights:
+
+13. Data Analytics for Insights:
+
 a) Utilize advanced data analytics tools to gather insights into user behavior, preferences, and 
 market trends.
 b) Leverage this data to make informed decisions for platform enhancements, marketing 
 strategies, and user experience improvements.
-10. International Expansion:
+
+14. International Expansion:
+
 a) Assess opportunities for international expansion, considering cultural nuances and regional 
 requirements.
 b) Localize the platform to cater to the specific needs of users in different regions, potentially 
