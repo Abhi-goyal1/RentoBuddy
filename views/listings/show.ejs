@@ -123,7 +123,49 @@ color: #d50100;
                               </div>
                               <% }  else { %>
                                 <%= listing.reviews.length %>
-                                <span> Reviews .  <button id="shareButton" class=" btn btn-dark "> <i class="fa-solid fa-share-nodes"></i>Share</button> <button id="" class=" btn btn-success ms-2 "><i class="fa-solid fa-indian-rupee-sign"></i> Buy</button></span>
+                                <span> Reviews .  <button id="shareButton" class=" btn btn-dark "> <i class="fa-solid fa-share-nodes"></i>Share</button>
+                                   <button id="rzp-button1" class=" btn btn-success ms-2 "><i class="fa-solid fa-indian-rupee-sign"></i> Buy</button></span>
+                                   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                   <script>
+                                   var options = {
+                                       "key": "rzp_test_EoAYXrkIAubpuM", // Enter the Key ID generated from the Dashboard
+                                       "amount": " <%= listing.price * 100 %>", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                                       "currency": "INR",
+                                       "name": "<%=listing.owner.username%>",
+                                       "description": "Donate for better",
+                                       "image": "", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                                       "handler": function (response){
+                                           alert(response.razorpay_payment_id);
+                                           alert(response.razorpay_order_id);
+                                           alert(response.razorpay_signature)
+                                       },
+                                       "prefill": {
+                                           "name": "Your name",
+                                           "email": "xyz@example.com",
+                                           "contact": "contact no."
+                                       },
+                                       "notes": {
+                                           "address": "Vasudev Private Limited"
+                                       },
+                                       "theme": {
+                                           "color": "#75FD82"
+                                       }
+                                   };
+                                   var rzp1 = new Razorpay(options);
+                                   rzp1.on('payment.failed', function (response){
+                                           alert(response.error.code);
+                                           alert(response.error.description);
+                                           alert(response.error.source);
+                                           alert(response.error.step);
+                                           alert(response.error.reason);
+                                           alert(response.error.metadata.order_id);
+                                           alert(response.error.metadata.payment_id);
+                                   });
+                                   document.getElementById('rzp-button1').onclick = function(e){
+                                       rzp1.open();
+                                       e.preventDefault();
+                                   }
+                                   </script>
                               <% } %>
                              
                         </div>
@@ -304,6 +346,10 @@ color: #d50100;
           alert("Link copied to clipboard!");
       }
   });
-</script>
 
-<script src="/js/map.js"></script>
+
+
+
+
+
+</script>

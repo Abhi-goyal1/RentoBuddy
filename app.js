@@ -186,6 +186,9 @@ app.get("/logout", (req,res ,next)=>{
 
 
 
+
+
+
 // app.get("/",  (req, res) => {
 //   res.send("Hi, I am root");
 // });
@@ -195,6 +198,10 @@ app.get("/", async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
 });
+
+app.get("/privacyPolicy", async (req , res)=>{
+  res.render("/privacyPolicy.ejs");
+})
 
 //New Route
 app.get("/listings/new", (req, res) => {
@@ -325,6 +332,8 @@ app.delete("/listings/:id/reviews/:reviewId", async(req,res)=>{
   res.redirect(`/listings/${id}`);
  
 })
+
+
 
 app.listen(8080, () => {
   console.log("server is listening to port 8080");
