@@ -200,7 +200,13 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/privacyPolicy", async (req , res)=>{
-  res.render("/privacyPolicy.ejs");
+  res.render("includes/privacyPolicy.ejs");
+})
+app.get("/contact-us", async (req , res)=>{
+  res.render("includes/contactUs.ejs");
+})
+app.get("/about-us", async (req , res)=>{
+  res.render("includes/aboutUs.ejs");
 })
 
 //New Route
