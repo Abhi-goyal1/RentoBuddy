@@ -1,5 +1,7 @@
 # RentoBuddy 
 
+![brandbird (2)](https://github.com/Abhi-goyal1/RentoBuddy/assets/96677039/3886fbe1-4ec8-4aac-aeff-6fdcdb66021c)
+
 # 1.1 Introduction of Project :
 
 RentoBuddy, your go-to destination for hassle-free online renting and selling. RentoBuddy is not 
